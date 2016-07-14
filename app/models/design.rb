@@ -3,7 +3,7 @@ class Design < ApplicationRecord
   belongs_to :user
   belongs_to :stone
 
-  validates :type, presence: true
+  validates :model, presence: true
 
   def price
     self.stone.cost
