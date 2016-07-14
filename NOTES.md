@@ -7,6 +7,13 @@
 - git remote add origin git@github.com:sascott624/rails-jeweler-designs.git
 - git push -u origin master
 
+- gem 'devise'
+- rails generate devise:install
+- #TODO -> define root in routes
+        -> flash messages
+        -> navbar in header with links to sign up, sign in, logout
+- rails g devise User
+
 
 #DATABASE:
 
