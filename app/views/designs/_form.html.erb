@@ -6,7 +6,7 @@
   <%= f.text_field :price %><br><br>
 
   <%= f.label :user %><br>
-  <%= f.collection_select :user, User.all, :id, :name %><br><br>
+  <%= f.collection_select :user, User.all, :id, :email %><br><br>
 
   <%= f.label :stone %><br>
   <%= f.collection_select :stone, Stone.all, :id, :name %><br><br>
