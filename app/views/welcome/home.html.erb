@@ -8,3 +8,18 @@
     Your profile looks incomplete. Click here to add your name and location!
   </p>
 <% end %>
+
+<h2>Designs</h2>
+<ul>
+  <% @designs.all.each do |design| %>
+  <li><%= design.type %> - <%= design.metal %></li>
+  <% end %>
+</ul>
+
+
+<h2>Stones</h2>
+<ul>
+  <% @stones.all.each do |stone| %>
+  <li><%= stone.name %> - <%= stone.cost %></li>
+  <% end %>
+</ul>
