@@ -1,0 +1,9 @@
+<h1>Stone Details</h1>
+
+<ul>
+  <li>Name: <%= @stone.name %></li>
+  <li>Weight: <%= @stone.weight%> ct </li>
+  <li>Cost: <%= @stone.cost %> </li>
+</ul>
+
+<%= link_to "Edit Stone", edit_stone_path(@stone) %>

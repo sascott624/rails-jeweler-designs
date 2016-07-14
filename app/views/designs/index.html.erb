@@ -1,6 +1,8 @@
 <h1>Design Index</h1>
 
 <ul><% @designs.each do |design| %>
-  <li><%= design.model %> - <%= design.metal %> </li>
+  <li><%= link_to design.model, design_path(design) %> - <%= design.metal %> </li>
   <% end %>
 </ul>
+
+<%= link_to "Add a New Design", new_design_path %>

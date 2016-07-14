@@ -1,8 +1,9 @@
 <h1>Design Details</h1>
 
 <ul>
-  <li><%= design.model %></li>
-  <li><%= design.metal %></li>
+  <li>Design Type: <%= @design.model %></li>
+  <li>Stone: <%= link_to @design.stone.name, stone_path(@design.stone) %> </li>
+  <li>Metal: <%= @design.metal %> </li>
 </ul>
 
-<%= link_to "Add a New Design", new_design_path %>
+<%= link_to "Edit Design", edit_design_path(@design) %>
