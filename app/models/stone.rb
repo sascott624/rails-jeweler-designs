@@ -1,0 +1,2 @@
+class Stone < ApplicationRecord
+end
