@@ -44,15 +44,21 @@ User
 has_many :designs
 has_many :stones, through: :designs
 
+- #TODO - add validations?
+
 Design
 =======================================
 belongs_to :user
 belongs_to :stone
 
+- #TODO - add validations?
+
 Stone
 =======================================
 has_many :designs
 has_many :users, through: :designs
+
+validates :name, :weight, :cost, presence: true
 
 
 #CONTROLLERS & ACTIONS:
