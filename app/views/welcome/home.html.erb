@@ -1,1 +1,10 @@
-Welcome
+<% if !current_user%>
+  <h1>Welcome!</h1>
+<% elsif current_user.name %>
+  <h1>Welcome, <%= current_user.name %> </h1>
+<% else %>
+  <h1>Welcome, <%= current_user.email %> </h1>
+  <p>
+    Your profile looks incomplete. Click here to add your name and location!
+  </p>
+<% end %>
