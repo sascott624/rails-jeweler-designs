@@ -1,0 +1,13 @@
+<%= form_for @stone do |f| %>
+  <%= f.label :name %><br>
+  <%= f.text_field :name %><br><br>
+
+  <%= f.label "Weight, in ct" %><br>
+  <%= f.text_field :weight %><br><br>
+
+  <%= f.label :cost %><br>
+  <%= f.text_field :cost %><br><br>
+
+  <%= f.submit %>
+
+<% end %>
