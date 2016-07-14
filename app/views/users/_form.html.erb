@@ -14,8 +14,23 @@
     If you'd like to add a new design, please fill out the below:
   </p>
   <%= f.fields_for :designs, @user.designs.build do |design_fields| %>
-    <%= design_fields.label :metal %>
-    <%= design_fields.text_field :metal %>
+    <%= design_fields.label :metal %><br>
+    <%= design_fields.collection_select :metal, ["White Gold", "Yellow Gold", "Pink Gold", "Platinum", "Sterling Silver"], :to_s, :to_s %><br><br>
+
+    <%= design_fields.label :price %><br>
+    <%= design_fields.text_field :price %><br><br>
+
+    <%= design_fields.label :model %><br>
+    <%= design_fields.collection_select :model, ["Necklace", "Bracelet", "Earrings", "Ring"], :to_s, :to_s %><br><br>
+
+    <%= design_fields.label :user %><br>
+    <%= design_fields.collection_select :user, User.all, :id, :email %><br><br>
+
+    <%= design_fields.label :stone %><br>
+    <%= design_fields.collection_select :stone, Stone.all, :id, :name %><br><br>
+
   <% end %>
+
+  <%= f.submit %>
 
 <% end %>
