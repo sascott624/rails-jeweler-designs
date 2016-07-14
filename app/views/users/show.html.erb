@@ -1,0 +1,23 @@
+<h1>User Details</h1>
+
+<div class="information_div">
+  <h3>Information</h3>
+  <ul>
+    <% if @user.name %>
+    <li>Name: <%= @user.name %></li>
+    <% end %>
+    <% if @user.location %>
+    <li>Location: <%= @user.location %></li>
+    <% end %>
+    <li>Email: <%= @user.email %></li>
+  </ul>
+</div>
+
+<div class="designs_div">
+  <h3>Designs</h3>
+  <ul>
+    <% @user.designs.each do |design| %>
+    <li><%= design.type %> </li>
+    <% end %>
+  </ul>
+</div>
