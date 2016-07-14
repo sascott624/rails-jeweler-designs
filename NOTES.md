@@ -28,7 +28,6 @@ Design
 - stone_id
 - type
 - metal
-- price
 
 Stone
 =======================================
@@ -46,12 +45,17 @@ has_many :stones, through: :designs
 
 - #TODO - add validations?
 
+- #most_expensive_design
+_ #most_expensive_stone
+
 Design
 =======================================
 belongs_to :user
 belongs_to :stone
 
 - #TODO - add validations?
+
+- #price - based on stone cost, metal, and type
 
 Stone
 =======================================
@@ -60,7 +64,13 @@ has_many :users, through: :designs
 
 validates :name, :weight, :cost, presence: true
 
+- #heaviest
+- #most_expensive
+
 
 #CONTROLLERS & ACTIONS:
+
+WELCOME
+home - root
 
 #VIEWS:
