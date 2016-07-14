@@ -40,4 +40,10 @@ class DesignsController < ApplicationController
     @design = Design.find(params[:id])
   end
 
+  private
+
+  def design_params
+    params.require(:design).permit(:user_id, :stone_id, :metal, :model)
+  end
+
 end

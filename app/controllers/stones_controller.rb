@@ -39,4 +39,9 @@ class StonesController < ApplicationController
   def edit
     @stone = Stone.find(params[:id])
   end
+
+  private
+
+  def stone_params
+    params.require(:stone).permit(:name, :weight, :cost)
 end
