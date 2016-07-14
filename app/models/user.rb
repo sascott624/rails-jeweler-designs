@@ -6,5 +6,7 @@ class User < ApplicationRecord
 
   has_many :designs
   has_many :stones, through: :designs
-  
+
+  validates :email, :password, presence: true
+
 end
