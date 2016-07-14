@@ -9,9 +9,7 @@
 
 - gem 'devise'
 - rails generate devise:install
-- #TODO -> define root in routes
-        -> flash messages
-        -> navbar in header with links to sign up, sign in, logout
+- #TODO -> flash messages
 - rails g devise User
 
 
