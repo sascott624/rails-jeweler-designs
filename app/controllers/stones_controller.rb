@@ -44,4 +44,6 @@ class StonesController < ApplicationController
 
   def stone_params
     params.require(:stone).permit(:name, :weight, :cost)
+  end
+  
 end

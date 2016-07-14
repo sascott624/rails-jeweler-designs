@@ -1,0 +1,16 @@
+<%= form_for @design do |f| %>
+  <%= f.label :metal %><br>
+  <%= f.text_field :metal %><br><br>
+
+  <%= f.label :price %><br>
+  <%= f.text_field :price %><br><br>
+
+  <%= f.label :user %><br>
+  <%= f.collection_select :user, User.all, :id, :name %><br><br>
+
+  <%= f.label :stone %><br>
+  <%= f.collection_select :stone, Stone.all, :id, :name %><br><br>
+
+  <%= f.submit %>
+
+<% end %>
