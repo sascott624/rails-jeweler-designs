@@ -2,8 +2,6 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    @designs = Design.all
-    @stones = Stone.all
   end
 
   def create

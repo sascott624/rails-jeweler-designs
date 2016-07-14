@@ -9,7 +9,7 @@
   </p>
 <% end %>
 
-<h2>Designs</h2>
+<h2><%= link_to "Designs", designs_path %></h2>
 <ul>
   <% @designs.each do |design| %>
   <li><%= design.model %> - <%= design.metal %></li>
@@ -17,7 +17,7 @@
 </ul>
 
 
-<h2>Stones</h2>
+<h2><%= link_to "Stones", stones_path %></h2>
 <ul>
   <% @stones.each do |stone| %>
   <li><%= stone.name %> - <%= stone.cost %></li>
