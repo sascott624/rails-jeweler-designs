@@ -2,6 +2,6 @@
 
 <ul>
   <% @stones.each do |stone| %>
-  <li><%= stone.name %> - <%= stone.cost %></li>
+  <li><%= link_to stone.name, stone_path(stone) %> - <%= stone.cost %></li>
   <% end %>
 </ul>
