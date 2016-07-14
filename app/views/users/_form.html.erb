@@ -10,5 +10,12 @@
 
   <%= f.label :password %><br>
   <%= f.password_field :password %><br><br>
+  <p>
+    If you'd like to add a new design, please fill out the below:
+  </p>
+  <%= f.fields_for :designs, @user.designs.build do |design_fields| %>
+    <%= design_fields.label :metal %>
+    <%= design_fields.text_field :metal %>
+  <% end %>
 
 <% end %>
