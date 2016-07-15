@@ -5,7 +5,7 @@
 <% else %>
   <h1>Welcome, <%= current_user.email %> </h1>
   <p>
-    Your profile looks incomplete. Click here to add your name and location!
+    Your profile looks incomplete. Click <%= link_to "here", edit_user_path(current_user) %> to add your name and location!
   </p>
 <% end %>
 
