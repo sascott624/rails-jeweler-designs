@@ -44,6 +44,26 @@ class DesignsController < ApplicationController
     @design = Design.find(params[:id])
   end
 
+  def necklaces
+    @designs = Design.necklaces
+    render :index
+  end
+
+  def bracelets
+    @designs = Design.bracelets
+    render :index
+  end
+
+  def rings
+    @designs = Design.rings
+    render :index
+  end
+
+  def earrings
+    @designs = Design.earrings
+    render :index
+  end
+
   private
 
   def design_params

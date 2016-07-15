@@ -1,7 +1,7 @@
 <h1>Design Index</h1>
 
 <ul><% @designs.each do |design| %>
-  <li><%= link_to design.model, design_path(design) %> - <%= design.metal %> </li>
+  <li><%= link_to design.model, design_path(design) %> - <%= design.metal %> - <%= design.stone.name %></li>
   <% end %>
 </ul>
 

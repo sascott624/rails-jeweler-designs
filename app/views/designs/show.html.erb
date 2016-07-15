@@ -1,7 +1,7 @@
 <h1>Design Details</h1>
 
 <ul>
-  <li>Design Type: <%= @design.model %></li>
+  <li>Model: <%= @design.model %></li>
   <li>Stone: <%= link_to @design.stone.name, stone_path(@design.stone) %> </li>
   <li>Metal: <%= @design.metal %> </li>
   <li><strong>Price: </strong><%= number_to_currency(@design.price) %></li>

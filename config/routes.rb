@@ -16,4 +16,10 @@ Rails.application.routes.draw do
   resources :designs
   resources :stones
 
+  get '/necklaces' => 'designs#necklaces', as: 'necklaces'
+  get '/bracelets' => 'designs#bracelets', as: 'bracelets'
+  get '/rings' => 'designs#rings', as: 'rings'
+  get '/earrings' => 'designs#earrings', as: 'earrings'
+
+
 end
