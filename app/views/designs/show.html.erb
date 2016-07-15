@@ -9,4 +9,7 @@
 
 <% if current_user == @design.user %>
   <%= link_to "Edit Design", edit_design_path(@design) %>
+  <br><br>
+  <%= form_tag design_path(@design), method: "delete" %>
+    <%= submit_tag "Delete Design" %>
 <% end %>
