@@ -5,6 +5,7 @@ class DesignsController < ApplicationController
   end
 
   def create
+    raise params.inspect
     @design = Design.new(design_params)
     if @design.save
       redirect_to design_path(@design)
@@ -43,7 +44,7 @@ class DesignsController < ApplicationController
   private
 
   def design_params
-    params.require(:design).permit(:user, :stone, :metal, :model)
+    params.require(:design).permit(:user_id, :stone_id, :metal, :model)
   end
 
 end
