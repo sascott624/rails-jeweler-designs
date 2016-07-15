@@ -6,4 +6,19 @@
   <li>Cost: <%= @stone.cost %> </li>
 </ul>
 
+<h3><em>Add a new design:</em></h3>
+
+<%= form_for @stone.designs.build do |f| %>
+  <%= f.hidden_field :user_id %>
+  <%= f.hidden_field :stone_id %>
+
+  <%= f.label :metal %><br>
+  <%= f.collection_select :metal, ["White Gold", "Yellow Gold", "Pink Gold", "Platinum", "Sterling Silver"], :to_s, :to_s %><br><br>
+
+  <%= f.label :model %><br>
+  <%= f.collection_select :model, ["Necklace", "Bracelet", "Earrings", "Ring"], :to_s, :to_s %><br><br>
+
+  <%= f.submit %>
+<% end %>
+
 <%= link_to "Edit Stone", edit_stone_path(@stone) %>
