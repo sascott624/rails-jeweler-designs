@@ -6,7 +6,7 @@
   <%= f.collection_select :model, ["Necklace", "Bracelet", "Earrings", "Ring"], :to_s, :to_s %><br><br>
 
   <%= f.hidden_field :user_id, value: current_user.id %>
-  
+
   <%= f.label :stone %><br>
   <%= f.collection_select :stone_id, Stone.all, :id, :name %><br><br>
 
