@@ -20,10 +20,12 @@
 </div>
 
 <div class="designs_div">
-  <h3>Designs</h3>
+  <h3><%= link_to "Your Designs", user_designs_path(@user) %></h3>
   <ul>
       <% @user.designs.each do |design| %>
         <li><%= design.model %> - <%= design.metal %> - <%= design.stone.name %>, <%= design.stone.weight %> ct</li>
+        <%= link_to "View Design", user_designs_path(@user, design) %>
+        <br><br>
       <% end %>
       <p><%= link_to "Add a New Design", new_design_path %></p>
   </ul>

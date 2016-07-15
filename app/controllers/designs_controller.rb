@@ -1,7 +1,11 @@
 class DesignsController < ApplicationController
 
   def index
-    @designs = Design.all
+    if params[:user_id]
+      @designs = User.find(params[:user_id]).designs
+    else
+      @designs = Design.all
+    end
   end
 
   def create
@@ -18,7 +22,11 @@ class DesignsController < ApplicationController
   end
 
   def show
-    @design = Design.find(params[:id])
+    if params[:user_id]
+      @design = Design.find(params[:id])
+    else
+      @design = Design.find(params[:id])
+    end
   end
 
   def update
