@@ -41,5 +41,19 @@ class Design < ApplicationRecord
     end
   end
 
+  def self.necklaces
+    self.where(model: "Necklace")
+  end
 
+  def self.bracelets
+    self.where(model: "Bracelet")
+  end
+
+  def self.rings
+    self.where(model: "Ring")
+  end
+
+  def self.earrings
+    self.where(model: "Earrings")
+  end
 end
