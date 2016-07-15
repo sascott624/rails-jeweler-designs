@@ -34,7 +34,7 @@
 <div class="stones_div">
   <h3><%= link_to "Your Stones", user_stones_path(@user) %></h3>
 
-  <ul><% @user.stones.each do |stone| %>
+  <ul><% @stones.each do |stone| %>
     <li> <%= stone.name %>, <%= stone.weight %> ct - <%= number_to_currency(stone.cost) %> </li>
     <%= link_to "View Stone", user_stone_path(@user, stone) %>
     <br><br>
