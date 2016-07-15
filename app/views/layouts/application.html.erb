@@ -9,7 +9,10 @@
   </head>
 
   <body>
-    <%= render 'layouts/messages' %>
+    <div class="fields_with_errors">
+      <%= render 'layouts/messages' %>
+    </div>
+    
     <br>
     <%= render 'layouts/nav' %>
     <%= yield %>
