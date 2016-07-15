@@ -1,9 +1,9 @@
 <% if !current_user%>
   <h1>Welcome!</h1>
 <% elsif current_user.name %>
-  <h1>Welcome, <%= current_user.name %> </h1>
+  <h1>Hello, <%= current_user.name %>! </h1>
 <% else %>
-  <h1>Welcome, <%= current_user.email %> </h1>
+  <h1>Hello, <%= current_user.email %>! </h1>
   <p>
     Your profile looks incomplete. Click <%= link_to "here", edit_user_path(current_user) %> to add your name and location!
   </p>

@@ -43,7 +43,7 @@ class DesignsController < ApplicationController
   private
 
   def design_params
-    params.require(:design).permit(:user, :stone, :metal, :model)
+    params.require(:design).permit(:user, :stone, :metal, :model, stones_attributes: [:name, :weight, :cost])
   end
 
 end
