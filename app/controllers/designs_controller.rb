@@ -35,14 +35,16 @@ class DesignsController < ApplicationController
   end
 
   def destroy
-    @design = Design.find(params[:id])
+    authorize
     @design.destroy
     redirect_to designs_path
   end
 
   def edit
-    @design = Design.find(params[:id])
+    authorize
   end
+
+
 
   def necklaces
     @designs = Design.necklaces
@@ -68,6 +70,15 @@ class DesignsController < ApplicationController
 
   def design_params
     params.require(:design).permit(:user_id, :stone_id, :metal, :model)
+  end
+
+  def authorize
+    @design = Design.find(params[:id])
+    unless @design.user_id == current_user.id
+      flash[:notice] = "You are not the creator of this design, and do not have access to update or destroy it"
+      redirect_to welcome_path
+      return false
+    end
   end
 
 end
