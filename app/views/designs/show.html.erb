@@ -4,6 +4,7 @@
   <li>Design Type: <%= @design.model %></li>
   <li>Stone: <%= link_to @design.stone.name, stone_path(@design.stone) %> </li>
   <li>Metal: <%= @design.metal %> </li>
+  <li><strong>Price: </strong><%= number_to_currency(@design.price) %></li>
 </ul>
 
 <%= link_to "Edit Design", edit_design_path(@design) %>
