@@ -5,7 +5,6 @@ class DesignsController < ApplicationController
   end
 
   def create
-    raise params.inspect
     @design = Design.new(design_params)
     if @design.save
       redirect_to design_path(@design)
