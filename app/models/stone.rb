@@ -12,4 +12,8 @@ class Stone < ApplicationRecord
     end
   end
 
+  def self.most_expensive
+    Stone.order(cost: :desc).limit(1)
+  end
+
 end
