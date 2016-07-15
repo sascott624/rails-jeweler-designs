@@ -17,7 +17,7 @@
   <h3>Designs</h3>
   <ul>
     <% @user.designs.each do |design| %>
-    <li><%= design.model %> - <%= design.metal %> </li>
+    <li><%= design.model %> - <%= design.metal %> - <%= design.stone.name %>, <%= design.stone.weight %> ct</li>
     <% end %>
   </ul>
 </div>

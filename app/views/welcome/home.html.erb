@@ -12,7 +12,7 @@
 <h2><%= link_to "Designs", designs_path %></h2>
 <ul>
   <% @designs.each do |design| %>
-  <li><%= design.model %> - <%= design.metal %></li>
+  <li><%= design.model %> - <%= design.metal %> - <%= design.stone.name %>, <%= design.stone.weight %> ct</li>
   <% end %>
 </ul>
 
