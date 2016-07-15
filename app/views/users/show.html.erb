@@ -16,8 +16,12 @@
 <div class="designs_div">
   <h3>Designs</h3>
   <ul>
-    <% @user.designs.each do |design| %>
-    <li><%= design.model %> - <%= design.metal %> - <%= design.stone.name %>, <%= design.stone.weight %> ct</li>
+    <% if !@user.designs.count == 0 %>
+      <% @user.designs.each do |design| %>
+        <li><%= design.model %> - <%= design.metal %> - <%= design.stone.name %>, <%= design.stone.weight %> ct</li>
+      <% end %>
+    <% else %>
+      <li><%= link_to "Add a New Design", new_design_path %></li>
     <% end %>
   </ul>
 </div>
