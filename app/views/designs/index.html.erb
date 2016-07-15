@@ -5,4 +5,8 @@
   <% end %>
 </ul>
 
-<%= link_to "Add a New Design", new_design_path %>
+<% if current_page?(user_designs_path) %>
+  <%= link_to "Add a New Design", new_user_design_path %>
+<% else %>
+  <%= link_to "Add a New Design", new_design_path %>
+<% end %>

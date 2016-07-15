@@ -22,11 +22,7 @@ class DesignsController < ApplicationController
   end
 
   def show
-    if params[:user_id]
-      @design = Design.find(params[:id])
-    else
-      @design = Design.find(params[:id])
-    end
+    @design = Design.find(params[:id])
   end
 
   def update
