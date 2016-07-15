@@ -7,4 +7,6 @@
   <li><strong>Price: </strong><%= number_to_currency(@design.price) %></li>
 </ul>
 
-<%= link_to "Edit Design", edit_design_path(@design) %>
+<% if current_user == @design.user %>
+  <%= link_to "Edit Design", edit_design_path(@design) %>
+<% end %>
