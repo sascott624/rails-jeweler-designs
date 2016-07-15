@@ -6,7 +6,11 @@ Rails.application.routes.draw do
   resources :users
 
   resources :users, only: [:show] do
-    resources :designs, only: [:index, :new]
+    resources :designs, only: [:index, :new, :show]
+  end
+
+  resources :users, only: [:show] do
+    resources :stones, only: [:index, :new, :show]
   end
 
   resources :designs

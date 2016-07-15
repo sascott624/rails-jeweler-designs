@@ -3,12 +3,12 @@
 <ul>
   <li>Name: <%= @stone.name %></li>
   <li>Weight: <%= @stone.weight%> ct </li>
-  <li>Cost: <%= @stone.cost %> </li>
+  <li>Cost: <%= number_to_currency(@stone.cost) %> </li>
 </ul>
 
 <%= link_to "Edit Stone", edit_stone_path(@stone) %>
 
-<%= if current_user %>
+<% if current_user %>
   <h3><em>Add a new design:</em></h3>
 
   <%= form_for @stone.designs.build do |f| %>

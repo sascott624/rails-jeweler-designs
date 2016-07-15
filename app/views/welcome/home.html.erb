@@ -11,7 +11,7 @@
 <h2><%= link_to "View All Stones", stones_path %></h2>
 <ul>
   <% @stones.each do |stone| %>
-  <li><%= stone.name %> - <%= stone.cost %></li>
+  <li><%= stone.name %>: <%= number_to_currency(stone.cost) %></li>
   <% end %>
 </ul>
 

@@ -24,10 +24,21 @@
   <ul>
       <% @user.designs.each do |design| %>
         <li><%= design.model %> - <%= design.metal %> - <%= design.stone.name %>, <%= design.stone.weight %> ct</li>
-        <%= link_to "View Design", user_designs_path(@user, design) %>
+        <%= link_to "View Design", user_design_path(@user, design) %>
         <br><br>
       <% end %>
       <p><%= link_to "Add a New Design", new_design_path %></p>
+  </ul>
+</div>
+
+<div class="stones_div">
+  <h3><%= link_to "Your Stones", user_stones_path(@user) %></h3>
+
+  <ul><% @user.stones.each do |stone| %>
+    <li> <%= stone.name %>, <%= stone.weight %> ct - <%= number_to_currency(stone.cost) %> </li>
+    <%= link_to "View Stone", user_stone_path(@user, stone) %>
+    <br><br>
+    <% end %>
   </ul>
 </div>
 
