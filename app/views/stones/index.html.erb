@@ -1,5 +1,8 @@
 <h1>Stone Index</h1>
 
+Most Expensive: <%= link_to @expensive.name, stone_path(@expensive) %><br>
+Least Expensive: <%= link_to @cheap.name, stone_path(@cheap) %><br>
+
 <ul>
   <% @stones.each do |stone| %>
   <li><%= link_to stone.name, stone_path(stone) %> - <%= stone.weight %> ct</li>

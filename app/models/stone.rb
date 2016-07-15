@@ -13,11 +13,11 @@ class Stone < ApplicationRecord
   end
 
   def self.most_expensive
-    Stone.order(cost: :desc).limit(1)
+    Stone.order(cost: :desc).limit(1)[0]
   end
 
   def self.least_expensive
-    Stone.order(cost: :asc).limit(1)
+    Stone.order(cost: :asc).limit(1)[0]
   end
 
 end

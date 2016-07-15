@@ -2,6 +2,8 @@ class StonesController < ApplicationController
 
   def index
     @stones = Stone.all
+    @expensive = Stone.most_expensive
+    @cheap = Stone.least_expensive
   end
 
   def create
