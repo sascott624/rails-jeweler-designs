@@ -1,6 +1,10 @@
 <h1>User Index</h1>
 
 <ul><% @users.each do |user| %>
-  <li><%= user.email %> </li>
+  <% if user.name && user.location %>
+    <li><%= user.name %> - <%= user.location %> </li>
+  <% else %>
+    <li><%= user.email %> </li>
   <% end %>
+<% end %>
 </ul>
