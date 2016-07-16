@@ -7,7 +7,7 @@
 </ul>
 
 
-<% if current_user %>
+<% if current_page?(stone_path(@stone)) && current_user %>
   <h3><em>Add a new design:</em></h3>
 
   <%= form_for @stone.designs.build do |f| %>
