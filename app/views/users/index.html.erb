@@ -3,8 +3,10 @@
 <ul><% @users.each do |user| %>
   <% if user.name && user.location %>
     <li><%= user.name %> - <%= user.location %> </li>
+    <p> <%= link_to "View Profile", user_path(user) %> </p>
   <% else %>
     <li><%= user.email %> </li>
+    <p> <%= link_to "View Profile", user_path(user) %> </p>
   <% end %>
 <% end %>
 </ul>
