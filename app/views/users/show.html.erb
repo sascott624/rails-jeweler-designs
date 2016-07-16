@@ -4,10 +4,11 @@
   <h3>Information</h3>
   <ul>
     <% if @user.name %>
-    <li>Name: <%= @user.name %></li>
+      <li>Name: <%= @user.name %></li>
     <% end %>
+
     <% if @user.location %>
-    <li>Location: <%= @user.location %></li>
+      <li>Location: <%= @user.location %></li>
     <% end %>
     <li>Email: <%= @user.email %></li>
 
@@ -20,19 +21,22 @@
 </div>
 
 <div class="designs_div">
-  <h3><%= link_to "Your Designs", user_designs_path(@user) %></h3>
+  <h3><%= link_to "Designs", user_designs_path(@user) %></h3>
   <ul>
       <% @user.designs.each do |design| %>
         <li><%= design.model %> - <%= design.metal %> - <%= design.stone.name %>, <%= design.stone.weight %> ct</li>
         <%= link_to "View Design", user_design_path(@user, design) %>
         <br><br>
       <% end %>
-      <p><%= link_to "Add a New Design", new_design_path %></p>
+
+      <% if current_user == @user %>
+        <p><%= link_to "Add a New Design", new_design_path %></p>
+      <% end %>
   </ul>
 </div>
 
 <div class="stones_div">
-  <h3><%= link_to "Your Stones", user_stones_path(@user) %></h3>
+  <h3><%= link_to "Stones", user_stones_path(@user) %></h3>
 
   <ul><% @stones.each do |stone| %>
     <li> <%= stone.name %>, <%= stone.weight %> ct - <%= number_to_currency(stone.cost) %> </li>
