@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'pry'
-
+gem 'dotenv-rails', :groups => [:development, :test]
 gem 'devise'
 gem 'omniauth-facebook'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
