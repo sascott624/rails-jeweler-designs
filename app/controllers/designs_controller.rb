@@ -9,12 +9,16 @@ class DesignsController < ApplicationController
   end
 
   def create
-    @design = Design.new(design_params)
-    @design.user_id = current_user.id
-    if @design.save
-      redirect_to design_path(@design)
+    if params[:user_id]
+      @design = Design.new(design_params)
+      @design.user_id = current_user.id
+      if @design.save
+        redirect_to design_path(@design)
+      else
+        render :new
+      end
     else
-      render :new
+      redirect_to designs_path
     end
   end
 

@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resources :stones, only: [:index, :new, :show]
   end
 
-  resources :designs
+#  resources :designs
   resources :stones, only: [:index, :create, :new, :show, :destroy]
 
   get '/necklaces' => 'designs#necklaces', as: 'necklaces'
