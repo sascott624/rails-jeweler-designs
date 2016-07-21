@@ -11,9 +11,8 @@ class DesignsController < ApplicationController
   def create
     if params[:user_id]
       @design = Design.new(design_params)
-      @design.user_id = current_user.id
       if @design.save
-        redirect_to design_path(@design)
+        redirect_to user_design_path(@design.user, @design)
       else
         render :new
       end
@@ -23,8 +22,8 @@ class DesignsController < ApplicationController
   end
 
   def new
-    if params[:user_id]
-      @design = Design.new
+    if params[:user_id] && current_user.id == params[:user_id]
+      @design = Design.new(user_id: params[:user_id])
     else
       redirect_to designs_path
     end
@@ -38,7 +37,7 @@ class DesignsController < ApplicationController
     @design = Design.find(params[:id])
     @design.update(design_params)
     if @design.save
-      redirect_to design_path(@design)
+      redirect_to user_design_path(@design.user, @design)
     else
       render :edit
     end
