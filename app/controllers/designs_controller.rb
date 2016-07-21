@@ -35,6 +35,7 @@ class DesignsController < ApplicationController
 
   def update
     design_find
+    @user = User.find_by_id(params[:user_id])
     @design.update(design_params)
     if @design.save
       redirect_to user_design_path(@design.user, @design)
@@ -54,8 +55,6 @@ class DesignsController < ApplicationController
       @user = User.find_by_id(params[:user_id])
       @design = @user.designs.find_by(id: params[:id])
       redirect_to user_designs_path(@user)
-    else
-      alert: "SOME ALERT HERE"
     end
   end
 

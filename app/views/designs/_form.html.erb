@@ -1,12 +1,12 @@
-<%= form_for @design do |f| %>
-  <%= user_id_field(@design) %>
+<%= form_for @design, url: user_design_path(@user, @design) do |f| %>
+
   <%= f.label :metal %><br>
   <%= f.collection_select :metal, ["White Gold", "Yellow Gold", "Pink Gold", "Platinum", "Sterling Silver"], :to_s, :to_s %><br><br>
 
   <%= f.label :model %><br>
   <%= f.collection_select :model, ["Necklace", "Bracelet", "Earrings", "Ring"], :to_s, :to_s %><br><br>
 
-<!--  <%= f.hidden_field :user_id, value: current_user.id %> -->
+  <%= f.hidden_field :user_id, value: current_user.id %>
 
   <%= f.label :stone %><br>
   <%= f.collection_select :stone_id, Stone.all, :id, :name %><br><br>
