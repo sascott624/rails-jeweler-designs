@@ -8,8 +8,8 @@
 </ul>
 
 <% if current_user == @design.user %>
-  <%= link_to "Edit Design", edit_design_path(@design) %>
+  <%= link_to "Edit Design", edit_user_design_path(current_user, @design) %>
   <br><br>
-  <%= form_tag design_path(@design), method: "delete" %>
+  <%= form_tag user_design_path(current_user, @design), method: "delete" %>
     <%= submit_tag "Delete Design" %>
 <% end %>
