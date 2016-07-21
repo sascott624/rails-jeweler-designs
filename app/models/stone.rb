@@ -6,8 +6,9 @@ class Stone < ApplicationRecord
   validates :name, :weight, :cost, presence: true
 
   def designs_attributes=(design_attributes)
+    # design_attributes = {metal:"Gold", model:"Necklace", user_id:3, stone_id:7}
     design_attributes.values.each do |design_attribute|
-      design = Design.find_or_create_by(design_attribute)
+      design = Design.find_by(design_attribute)
       self.designs.build(design)
     end
   end

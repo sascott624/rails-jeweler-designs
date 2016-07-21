@@ -26,6 +26,7 @@ class DesignsController < ApplicationController
   end
 
   def update
+    @design = Design.find(params[:id])
     @design.update(design_params)
     if @design.save
       redirect_to design_path(@design)

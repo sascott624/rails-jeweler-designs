@@ -14,6 +14,7 @@ class UsersController < ApplicationController
   end
 
   def new
+    binding.pry
     @user = User.new
   end
 
