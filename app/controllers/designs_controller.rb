@@ -9,10 +9,11 @@ class DesignsController < ApplicationController
   end
 
   def create
-    if params[:user_id]
-      @design = Design.new(design_params)
+    if params[:design][:user_id]
+      @user = User.find(params[:design][:user_id])
+      @design = @user.designs.build(design_params)
       if @design.save
-        redirect_to user_design_path(@design.user, @design)
+        redirect_to user_design_path(@user, @design)
       else
         render :new
       end
@@ -34,13 +35,15 @@ class DesignsController < ApplicationController
   end
 
   def update
-    design_find
-    @user = User.find_by_id(params[:user_id])
-    @design.update(design_params)
-    if @design.save
-      redirect_to user_design_path(@design.user, @design)
-    else
-      render :edit
+    if params[:design][:user_id]
+      @user = User.find(params[:design][:user_id])
+      @design = @user.designs.find_by(id: params[:id])
+      @design.update(design_params)
+      if @design.save
+        redirect_to user_design_path(@design.user, @design)
+      else
+        render :edit
+      end
     end
   end
 
@@ -52,8 +55,9 @@ class DesignsController < ApplicationController
 
   def edit
     if params[:user_id]
-      @user = User.find_by_id(params[:user_id])
+      @user = User.find(params[:user_id])
       @design = @user.designs.find_by(id: params[:id])
+    else
       redirect_to user_designs_path(@user)
     end
   end

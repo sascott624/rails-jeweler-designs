@@ -6,14 +6,14 @@ Rails.application.routes.draw do
   resources :users
 
   resources :users, only: [:show] do
-    resources :designs, only: [:index, :new, :show, :edit, :update]
+    resources :designs, only: [:index, :create, :new, :show, :edit, :update]
   end
 
   resources :users, only: [:show] do
     resources :stones, only: [:index, :new, :show]
   end
 
-#  resources :designs
+  resources :designs, only: [:index, :create, :update]
   resources :stones, only: [:index, :create, :new, :show, :destroy]
 
   get '/necklaces' => 'designs#necklaces', as: 'necklaces'
