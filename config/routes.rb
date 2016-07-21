@@ -14,7 +14,6 @@ Rails.application.routes.draw do
   end
 
 #  resources :designs
-  resources :designs, only: [:index]
   resources :stones, only: [:index, :create, :new, :show, :destroy]
 
   get '/necklaces' => 'designs#necklaces', as: 'necklaces'

@@ -22,19 +22,19 @@ class DesignsController < ApplicationController
   end
 
   def new
-    if params[:user_id] && current_user.id == params[:user_id]
-      @design = Design.new(user_id: params[:user_id])
+    if params[:user_id] && current_user
+      @design = Design.new(user_id: current_user.id)
     else
-      redirect_to designs_path
+      redirect_to user_designs_path
     end
   end
 
   def show
-    @design = Design.find(params[:id])
+    design_find
   end
 
   def update
-    @design = Design.find(params[:id])
+    design_find
     @design.update(design_params)
     if @design.save
       redirect_to user_design_path(@design.user, @design)
@@ -50,11 +50,17 @@ class DesignsController < ApplicationController
   end
 
   def edit
-    authorize
+    if params[:user_id]
+      @user = User.find_by_id(params[:user_id])
+      @design = @user.designs.find_by(id: params[:id])
+      redirect_to user_designs_path(@user)
+    else
+      alert: "SOME ALERT HERE"
+    end
   end
 
 
-
+#---------------- model methods ------------------>
   def necklaces
     @designs = Design.necklaces
     render :index
@@ -75,14 +81,21 @@ class DesignsController < ApplicationController
     render :index
   end
 
+  #---------------- model methods ------------------>
+
+
   private
 
   def design_params
     params.require(:design).permit(:user_id, :stone_id, :metal, :model)
   end
 
-  def authorize
+  def design_find
     @design = Design.find(params[:id])
+  end
+
+  def authorize
+    design_find
     unless @design.user_id == current_user.id
       flash[:notice] = "You are not the creator of this design, and do not have access to update or destroy it"
       redirect_to welcome_path

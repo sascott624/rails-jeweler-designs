@@ -30,7 +30,7 @@
       <% end %>
 
       <% if current_user == @user %>
-        <p><%= link_to "Add a New Design", new_user_design_path(current_user, @design) %></p>
+        <p><%= link_to "Add a New Design", new_user_design_path(@user, @design) %></p>
       <% end %>
   </ul>
 </div>
