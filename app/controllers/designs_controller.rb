@@ -13,8 +13,7 @@ class DesignsController < ApplicationController
       @user = User.find(params[:design][:user_id])
       @design = @user.designs.build(design_params)
       if params[:design][:stone]
-        stone_attributes= (params[:design][:stone])
-        binding.pry
+        stone_attributes= (params[:design][:stone_attributes])
       end
       if @design.save
         redirect_to user_design_path(@user, @design)
@@ -90,17 +89,11 @@ class DesignsController < ApplicationController
 
   #---------------- model methods ------------------>
 
-  def stone_attributes=(attributes)
-    @stone = self.build_stone(name: attributes[:name], weight: attributes[:weight], cost: attributes[:cost])
-    if @stone.save
-      @design.stone_id = @stone.id
-    end
-  end
 
   private
 
   def design_params
-    params.require(:design).permit(:user_id, :stone_id, :metal, :model, stone: [:name, :weight, :cost])
+    params.require(:design).permit(:user_id, :stone_id, :metal, :model, stone_attributes: [:name, :weight, :cost])
   end
 
   def design_find

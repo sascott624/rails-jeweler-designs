@@ -5,6 +5,10 @@ class Design < ApplicationRecord
 
   validates :model, presence: true
 
+  def stone_attributes=(attributes)
+    @stone = self.build_stone(name: attributes[:name], weight: attributes[:weight], cost: attributes[:cost])
+  end
+
   def price
     (self.metal_cost * self.model_cost) * self.stone.cost
   end
