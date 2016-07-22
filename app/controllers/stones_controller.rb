@@ -24,7 +24,7 @@ class StonesController < ApplicationController
   end
 
   def show
-    @stone = Stone.find(params[:id])
+    stone_find
   end
 
   def update
@@ -37,19 +37,23 @@ class StonesController < ApplicationController
   end
 
   def destroy
-    @stone = Stone.find(params[:id])
+    stone_find
     @stone.destroy
     redirect_to stones_path
   end
 
   def edit
-    @stone = Stone.find(params[:id])
+    stone_find
   end
 
   private
 
   def stone_params
     params.require(:stone).permit(:name, :weight, :cost, designs_attributes: [:metal, :model, :user_id, :stone_id])
+  end
+
+  def stone_find
+    @stone = Stone.find(params[:id])
   end
 
 end
