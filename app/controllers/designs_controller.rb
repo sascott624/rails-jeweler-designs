@@ -86,11 +86,17 @@ class DesignsController < ApplicationController
 
   #---------------- model methods ------------------>
 
+  def stones_attributes=(stone_attribute)
+    @stone = Stone.find_or_create_by(stones_attributes)
+    if @stone.save
+      self.stone_id = @stone.id
+    end
+  end
 
   private
 
   def design_params
-    params.require(:design).permit(:user_id, :stone_id, :metal, :model, stones_attributes: [:name, :weight, :cost]))
+    params.require(:design).permit(:user_id, :stone_id, :metal, :model, stones_attributes: [:name, :weight, :cost])
   end
 
   def design_find

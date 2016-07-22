@@ -8,8 +8,23 @@
 
   <%= f.hidden_field :user_id, value: current_user.id %>
 
-  <%= f.label :stone %><br>
-  <%= f.collection_select :stone_id, Stone.all, :id, :name %><br><br>
+<!--  <%= f.label :stone %><br> -->
+<!--  <%= f.collection_select :stone_id, Stone.all, :id, :name %><br><br><br> -->
+<!--  <%= f.select(:stone_id, Stone.all.collect {|s| [ s.name, s.id ] } + [ [ '--Create New--', 'new' ] ], {:include_blank => 'Please select a stone'}) %><br><br><br> -->
+
+  <%= f.label "Create a New Stone" %><br>
+  <%= f.fields_for :stones, @stone do |stones_fields| %><br>
+
+    <%= f.label :name %><br>
+    <%= stones_fields.text_field :name %><br><br>
+
+    <%= f.label "Weight, in ct" %><br>
+    <%= stones_fields.text_field :weight %><br><br>
+
+    <%= f.label :cost %><br>
+    <%= stones_fields.text_field :cost %><br><br>
+
+  <% end %>
 
   <%= f.submit %>
 
