@@ -11,9 +11,10 @@ class DesignsController < ApplicationController
   def create
     if params[:design][:user_id]
       @user = User.find(params[:design][:user_id])
+      binding.pry
       @design = @user.designs.build(design_params)
       if params[:design][:stone]
-        stone_attributes = (params[:design][:stone])
+        stone= (params[:design][:stone])
         binding.pry
       end
       if @design.save
@@ -90,7 +91,7 @@ class DesignsController < ApplicationController
 
   #---------------- model methods ------------------>
 
-  def stone_attributes=(attributes)
+  def stone=(attributes)
     binding.pry
     @stone = self.stone.build(name: attributes[:name], weight: attributes[:weight], cost: attributes[:cost])
     if @stone.save
@@ -101,7 +102,7 @@ class DesignsController < ApplicationController
   private
 
   def design_params
-    params.require(:design).permit(:user_id, :stone_id, :metal, :model, stone_attributes: [:name, :weight, :cost])
+    params.require(:design).permit(:user_id, :stone_id, :metal, :model, stone: [:name, :weight, :cost])
   end
 
   def design_find
