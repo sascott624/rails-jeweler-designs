@@ -14,17 +14,16 @@ class UsersController < ApplicationController
   end
 
   def new
-    binding.pry
     @user = User.new
   end
 
   def show
-    @user = User.find(params[:id])
+    find_user
     @stones = @user.stones.uniq
   end
 
   def update
-    @user = User.find(params[:id])
+    find_user
     @user.update(user_params)
     if @user.save
       redirect_to user_path(@user)
@@ -34,13 +33,13 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
+    find_user
     @user.destroy
     redirect_to welcome_path
   end
 
   def edit
-    @user = User.find(params[:id])
+    find_user
   end
 
   private
@@ -48,5 +47,10 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:email, :password, :name, :location)
   end
+
+  def find_user
+    @user = User.find(params[:id])
+  end
+
 
 end

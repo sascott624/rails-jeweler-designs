@@ -12,7 +12,7 @@ class DesignsController < ApplicationController
     if params[:design][:user_id]
       @user = User.find(params[:design][:user_id])
       @design = @user.designs.build(design_params)
-      if params[:design][:stone]
+      if params[:stone_id] == "new" || params[:design][:stone]
         stone_attributes= (params[:design][:stone_attributes])
       end
       if @design.save
