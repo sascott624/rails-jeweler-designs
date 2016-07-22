@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
 
+  before_action :find_user, only: [:show, :update]
+  before_action :validate_user, only: [:edit, :destroy]
+
   def index
     @users = User.all
   end
@@ -18,12 +21,10 @@ class UsersController < ApplicationController
   end
 
   def show
-    find_user
     @stones = @user.stones.uniq
   end
 
   def update
-    find_user
     @user.update(user_params)
     if @user.save
       redirect_to user_path(@user)
@@ -33,13 +34,12 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    find_user
     @user.destroy
     redirect_to welcome_path
   end
 
   def edit
-    find_user
+    raise current_user.errors.inspect
   end
 
   private
@@ -50,6 +50,14 @@ class UsersController < ApplicationController
 
   def find_user
     @user = User.find(params[:id])
+  end
+
+  def validate_user
+    find_user
+    if @user != current_user
+      flash[:error] = "You do not have permission to edit or destroy another user's profile"
+      redirect_to users_path
+    end
   end
 
 
