@@ -1,7 +1,7 @@
 <strong><%= link_to 'Home', welcome_path %></strong> ||
 <% if !user_signed_in? %>
   <%= link_to "Sign in", new_user_session_path %> || <%= link_to "Sign up", new_user_registration_path %> ||
-  <%= link_to "Login with Facebook!", user_omniauth_authorize_path(:facebook) %>
+  <%= link_to "Login with Facebook!", user_facebook_omniauth_authorize_path %>
 <% else %>
   <%= link_to "Your Profile", user_path(current_user) %> || <%= link_to "Sign out", destroy_user_session_path , :method => :delete %>
 <% end %>
