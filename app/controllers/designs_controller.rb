@@ -2,7 +2,7 @@ class DesignsController < ApplicationController
 
   def index
     if params[:user_id]
-      user_find.designs
+      @designs = User.find(params[:user_id]).designs
     else
       @designs = Design.all
     end
@@ -10,10 +10,9 @@ class DesignsController < ApplicationController
 
   def create
     if params[:design][:user_id]
-      user_find
+      @user = User.find(params[:design][:user_id])
       @design = @user.designs.build(design_params)
       if params[:stone_id] == "new" || params[:design][:stone]
-        @design.build_stone
         stone_attributes= (params[:design][:stone_attributes])
       end
       if @design.save
@@ -40,21 +39,17 @@ class DesignsController < ApplicationController
 
   def update
     if params[:design][:user_id]
-      user_find
+      @user = User.find(params[:design][:user_id])
       @design = @user.designs.find_by(id: params[:id])
-      if params[:stone_id] == "new" || params[:design][:stone]
-        stone_attributes= (params[:design][:stone_attributes])
-      end
-
       raise params.inspect
-#      if params[:stone_id] && params[:stone_id] != "new"
-#        raise params[:stone_id].inspect
-#        @design.update(stone_id: params[:stone_id], metal: params[:metal], model: params[:model])
-#        raise params[:stone_id].inspect
-#      elsif params[:stone_id] == "new" || params[:design][:stone]
-#        stone_attributes= (params[:design][:stone_attributes])
-#        @design.update(design_params)
-#      end
+      if params[:stone_id] && params[:stone_id] != "new"
+        raise params[:stone_id].inspect
+        @design.update(stone_id: params[:stone_id], metal: params[:metal], model: params[:model])
+        raise params[:stone_id].inspect
+      elsif params[:stone_id] == "new" || params[:design][:stone]
+        stone_attributes= (params[:design][:stone_attributes])
+        @design.update(design_params)
+      end
 
       if @design.save
         redirect_to user_design_path(@design.user, @design)
@@ -72,7 +67,7 @@ class DesignsController < ApplicationController
 
   def edit
     if params[:user_id]
-      user_find
+      @user = User.find(params[:user_id])
       @design = @user.designs.find_by(id: params[:id])
     else
       redirect_to user_designs_path(@user)
@@ -112,10 +107,6 @@ class DesignsController < ApplicationController
 
   def design_find
     @design = Design.find(params[:id])
-  end
-
-  def user_find
-    @user = User.find(params[:user_id]) || @user = User.find(params[:design][:user_id])
   end
 
   def authorize
