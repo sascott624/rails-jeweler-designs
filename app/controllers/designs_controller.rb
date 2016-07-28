@@ -41,7 +41,16 @@ class DesignsController < ApplicationController
     if params[:design][:user_id]
       @user = User.find(params[:design][:user_id])
       @design = @user.designs.find_by(id: params[:id])
-      @design.update(design_params)
+      raise params.inspect
+      if params[:stone_id] && params[:stone_id] != "new"
+        raise params[:stone_id].inspect
+        @design.update(stone_id: params[:stone_id], metal: params[:metal], model: params[:model])
+        raise params[:stone_id].inspect
+      elsif params[:stone_id] == "new" || params[:design][:stone]
+        stone_attributes= (params[:design][:stone_attributes])
+        @design.update(design_params)
+      end
+
       if @design.save
         redirect_to user_design_path(@design.user, @design)
       else

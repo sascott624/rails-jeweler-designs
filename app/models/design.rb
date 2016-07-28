@@ -3,7 +3,7 @@ class Design < ApplicationRecord
   belongs_to :user
   belongs_to :stone
 
-  validates :model, presence: true
+  validates :model, :metal, :stone_id, presence: true
 
   def stone_attributes=(attributes)
     @stone = self.build_stone(name: attributes[:name], weight: attributes[:weight], cost: attributes[:cost])

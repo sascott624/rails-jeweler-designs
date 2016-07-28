@@ -39,7 +39,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    raise current_user.errors.inspect
   end
 
   private
@@ -55,6 +54,7 @@ class UsersController < ApplicationController
   def validate_user
     find_user
     if @user != current_user
+#      current_user.errors.add(:permission, "You do not have permission to edit or destroy another user's profile")
       flash[:error] = "You do not have permission to edit or destroy another user's profile"
       redirect_to users_path
     end

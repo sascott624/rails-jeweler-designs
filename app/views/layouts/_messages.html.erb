@@ -1,3 +1,25 @@
+<% if current_user && current_user.errors.any? %>
+  <h4><%= pluralize(current_user.errors.count, "error") %>
+      prohibited this action:
+    </h4>
+    <ul>
+      <% current_user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+<% end %>
+
+<% if @design && @design.errors.any? %>
+  <h4><%= pluralize(@design.errors.count, "error") %>
+      prohibited this action:
+    </h4>
+    <ul>
+      <% @design.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+<% end %>
+
 <%= content_tag(:div, flash[:error], :id => "flash_error") if flash[:error] %>
 <%= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %>
 <%= content_tag(:div, flash[:alert], :id => "flash_alert") if flash[:alert] %>
