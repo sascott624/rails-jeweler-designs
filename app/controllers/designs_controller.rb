@@ -8,36 +8,6 @@ class DesignsController < ApplicationController
     end
   end
 
-  def create
-    if params[:design][:user_id]
-      @user = User.find(params[:design][:user_id])
-      @design = @user.designs.build(design_params)
-      # if the user has selected a stone from the dropdown ------------------>
-      if params[:design][:stone_id] != "" && params[:design][:stone_id] != "new"
-        @design.stone = Stone.find(params[:design][:stone_id])
-        if @design.save
-          redirect_to user_design_path(@user, @design)
-        else
-          render :new
-        end
-
-      else  # if the user has created a new stone ---------------------------->
-        @design.stone_attributes=(params[:design][:stone_attributes])
-        if @design.stone.save
-          @design.stone_id = @design.stone.id
-          if @design.save
-            redirect_to user_design_path(@user, @design)
-          else
-            render :new
-          end
-        end
-      end
-
-    else
-      redirect_to designs_path
-    end
-  end
-
   def new
     if params[:user_id] && current_user
       @design = Design.new(user_id: current_user.id)
@@ -50,25 +20,72 @@ class DesignsController < ApplicationController
     design_find
   end
 
+
+
+  def create
+    if params[:design][:user_id]
+      @user = User.find(params[:design][:user_id])
+      @design = @user.designs.build(design_params)
+
+      # if the user has selected a stone from the dropdown ------------------>
+      if params[:design][:stone_id] != "" && params[:design][:stone_id] != "new"
+        @design.stone = Stone.find(params[:design][:stone_id])
+        if @design.save
+          redirect_to user_design_path(@user, @design)
+        else
+          @design.errors.add(:incomplete, "Please select or create a stone.")
+          render :new
+        end
+
+      else  # if the user has created a new stone ---------------------------->
+        @design.stone_attributes=(params[:design][:stone_attributes])
+        if @design.stone.save
+          @design.stone_id = @design.stone.id
+          if @design.save
+            redirect_to user_design_path(@user, @design)
+          else
+            @design.errors.add(:incomplete, "Please select or create a stone.")
+            render :new
+          end
+        end
+      end
+
+    else # if there is no user ----------------------->
+      redirect_to designs_path
+    end
+  end
+
+
+
   def update
     if params[:design][:user_id]
       @user = User.find(params[:design][:user_id])
       @design = @user.designs.find_by(id: params[:id])
-      raise params.inspect
-      if params[:stone_id] && params[:stone_id] != "new"
-        raise params[:stone_id].inspect
-        @design.update(stone_id: params[:stone_id], metal: params[:metal], model: params[:model])
-        raise params[:stone_id].inspect
-      elsif params[:stone_id] == "new" || params[:design][:stone]
-        stone_attributes= (params[:design][:stone_attributes])
-        @design.update(design_params)
+      @design.update(design_params)
+      if params[:design][:stone_id] != "" && params[:design][:stone_id] != "new"
+        @design.stone = Stone.find(params[:design][:stone_id])
+        if @design.save
+          redirect_to user_design_path(@user, @design)
+        else
+          @design.errors.add(:incomplete, "Please select or create a stone.")
+          render :edit
+        end
+
+      else
+        @design.stone_attributes=(params[:design][:stone_attributes])
+        if @design.stone.save
+          @design.stone_id = @design.stone.id
+          if @design.save
+            redirect_to user_design_path(@user, @design)
+          else
+            @design.errors.add(:incomplete, "Please select or create a stone.")
+            render :edit
+          end
+        end
       end
 
-      if @design.save
-        redirect_to user_design_path(@design.user, @design)
-      else
-        render :edit
-      end
+    else
+      redirect_to designs_path
     end
   end
 
