@@ -12,20 +12,20 @@ class DesignsController < ApplicationController
     if params[:design][:user_id]
       @user = User.find(params[:design][:user_id])
       @design = @user.designs.build(design_params)
-      # if we are creating a new stone ------------->
-      if params[:stone_id] == "new" || params[:stone_id].nil? || params[:design][:stone]
+      # if the user has selected a stone from the dropdown ------------------>
+      if params[:design][:stone_id] != "" && params[:design][:stone_id] != "new"
+        @design.stone = Stone.find(params[:design][:stone_id])
+        if @design.save
+          redirect_to user_design_path(@user, @design)
+        else
+          render :new
+        end
+
+      else  # if the user has created a new stone ---------------------------->
         @design.stone_attributes=(params[:design][:stone_attributes])
         if @design.stone.save
           @design.stone_id = @design.stone.id
           if @design.save
-            redirect_to user_design_path(@user, @design)
-          else
-            render :new
-          end
-        # if we are selecting a stone from the dropdown -------------->
-        else
-          @design.stone_id = params[:design][:stone_id]
-          if @design.stone.save && @design.save
             redirect_to user_design_path(@user, @design)
           else
             render :new
