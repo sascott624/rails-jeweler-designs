@@ -13,15 +13,15 @@
   <%= f.select(:stone_id, Stone.all.collect {|s| [ "#{s.name} - #{s.weight} ct", s.id ] } + [ [ '--Create New--', 'new' ] ], {:include_blank => 'Please select a stone'}) %><br><br><br>
 
   <%= f.label "Or, Create a New Stone:" %><br>
-  <%= f.fields_for :stone_attributes, @design.build_stone do |stone_fields| %><br>
+  <%= f.fields_for :stone_attributes do |stone_fields| %><br>
 
-    <%= f.label :name %><br>
+    <%= stone_fields.label :name %><br>
     <%= stone_fields.text_field :name %><br><br>
 
-    <%= f.label "Weight, in ct" %><br>
+    <%= stone_fields.label "Weight, in ct" %><br>
     <%= stone_fields.text_field :weight %><br><br>
 
-    <%= f.label :cost %><br>
+    <%= stone_fields.label :cost %><br>
     <%= stone_fields.text_field :cost %><br><br>
 
   <% end %>
