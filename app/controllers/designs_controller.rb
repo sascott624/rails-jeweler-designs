@@ -21,11 +21,32 @@ class DesignsController < ApplicationController
   end
 
 
+  def destroy
+    authorize
+    @design.destroy
+    redirect_to designs_path
+  end
+
+  def edit
+    if params[:user_id]
+      @user = User.find(params[:user_id])
+      @design = @user.designs.find_by(id: params[:id])
+    else
+      redirect_to user_designs_path(@user)
+    end
+  end
+  
 
   def create
     if params[:design][:user_id]
       @user = User.find(params[:design][:user_id])
       @design = @user.designs.build(design_params)
+
+      # if the user has neither selected nor created a stone ----------------->
+      if params[:design][:stone_id] == "" && params[:design][:stone_attributes][:name] == ""
+        @design.errors.add(:incomplete_form, "Please select or create a stone.")
+        render :edit
+      end
 
       # if the user has selected a stone from the dropdown ------------------>
       if params[:design][:stone_id] != "" && params[:design][:stone_id] != "new"
@@ -33,18 +54,17 @@ class DesignsController < ApplicationController
         if @design.save
           redirect_to user_design_path(@user, @design)
         else
-          @design.errors.add(:incomplete, "Please select or create a stone.")
           render :new
         end
 
-      else  # if the user has created a new stone ---------------------------->
+      # if the user has created a new stone ---------------------------->
+      else
         @design.stone_attributes=(params[:design][:stone_attributes])
         if @design.stone.save
           @design.stone_id = @design.stone.id
           if @design.save
             redirect_to user_design_path(@user, @design)
           else
-            @design.errors.add(:incomplete, "Please select or create a stone.")
             render :new
           end
         end
@@ -61,6 +81,13 @@ class DesignsController < ApplicationController
     if params[:design][:user_id]
       @user = User.find(params[:design][:user_id])
       @design = @user.designs.find_by(id: params[:id])
+
+      # if the user has neither selected nor created a stone ----------------->
+      if params[:design][:stone_id] == "" && params[:design][:stone_attributes][:name] == ""
+        @design.errors.add(:incomplete_form, "Please select or create a stone.")
+        render :edit
+      end
+
       @design.update(design_params)
       if params[:design][:stone_id] != "" && params[:design][:stone_id] != "new"
         @design.stone = Stone.find(params[:design][:stone_id])
@@ -89,20 +116,6 @@ class DesignsController < ApplicationController
     end
   end
 
-  def destroy
-    authorize
-    @design.destroy
-    redirect_to designs_path
-  end
-
-  def edit
-    if params[:user_id]
-      @user = User.find(params[:user_id])
-      @design = @user.designs.find_by(id: params[:id])
-    else
-      redirect_to user_designs_path(@user)
-    end
-  end
 
 
 #---------------- model methods ------------------>
