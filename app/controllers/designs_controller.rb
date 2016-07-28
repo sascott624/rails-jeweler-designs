@@ -22,23 +22,17 @@ class DesignsController < ApplicationController
           else
             render :new
           end
+        # if we are selecting a stone from the dropdown -------------->
         else
           @design.stone_id = params[:design][:stone_id]
-          raise @design.inspect
-          if @design.save
-            raise @design.inspect
+          if @design.stone.save && @design.save
             redirect_to user_design_path(@user, @design)
           else
             render :new
           end
         end
       end
-#      if @design.save
-#        raise @design.inspect
-#        redirect_to user_design_path(@user, @design)
-#      else
-#        render :new
-#      end
+
     else
       redirect_to designs_path
     end
