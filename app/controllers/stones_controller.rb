@@ -15,6 +15,7 @@ class StonesController < ApplicationController
     if @stone.save
       redirect_to stone_path(@stone)
     else
+      @stone.errors.add(:incomplete_form, "Stones must have a valid name, weight, and cost.")
       render :new
     end
   end
@@ -32,6 +33,7 @@ class StonesController < ApplicationController
     if @stone.save
       redirect_to stone_path(@stone)
     else
+      @stone.errors.add(:incomplete_form, "Stones must have a valid name, weight, and cost.")
       render :edit
     end
   end
