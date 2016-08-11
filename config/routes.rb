@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   end
 
   resources :designs, only: [:index, :create, :update]
-  resources :stones, only: [:index, :create, :new, :show, :destroy]
+  resources :stones, only: [:index, :create, :new, :show]
 
   get '/necklaces' => 'designs#necklaces', as: 'necklaces'
   get '/bracelets' => 'designs#bracelets', as: 'bracelets'

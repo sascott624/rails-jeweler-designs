@@ -1,5 +1,7 @@
 class DesignsController < ApplicationController
 
+  before_action :authorize_design_owner, only: [:edit, :destroy]
+
   def index
     if params[:user_id]
       @designs = User.find(params[:user_id]).designs
@@ -22,7 +24,6 @@ class DesignsController < ApplicationController
 
 
   def destroy
-    authorize
     @design.destroy
     redirect_to designs_path
   end
@@ -32,10 +33,10 @@ class DesignsController < ApplicationController
       @user = User.find(params[:user_id])
       @design = @user.designs.find_by(id: params[:id])
     else
-      redirect_to user_designs_path(@user)
+      redirect_to user_design_path(@user, @design)
     end
   end
-  
+
 
   def create
     if params[:design][:user_id]
@@ -152,7 +153,7 @@ class DesignsController < ApplicationController
     @design = Design.find(params[:id])
   end
 
-  def authorize
+  def authorize_design_owner
     design_find
     unless @design.user_id == current_user.id
       flash[:notice] = "You are not the creator of this design, and do not have access to update or destroy it"
