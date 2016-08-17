@@ -11,7 +11,7 @@
 <div class="stoneDesigns">
   <% if @stone.designs %>
     <h2>Stone Designs</h2>
-    <ul><% @stone.designs.each do |design| %>
+    <ul class="designList"><% @stone.designs.each do |design| %>
       <li><%= design.model %> <em>by</em> <%= design.user.email %></li>
       <% end %>
     </ul>
@@ -49,7 +49,14 @@
       $('.stoneWeight').text("Weight: " + data["weight"] + " ct");
       $('.stoneCost').text("Cost: $" + data["cost"]);
       if(data["designs"].length > 0){
-        console.log("there are designs");
+        var l = "<li>";
+        for(i = 0; i < data["designs"].length; i++){
+          $(".stoneDesigns").show();
+          l += data["designs"][i]["model"] + "<em> by </em>";
+          console.log(data["designs"][i]);
+        }
+        l += "</li>";
+        $(".designList").html(l);
       }
       $('.js-next').attr("data-id", data["id"]);
     })
@@ -59,13 +66,16 @@
 <script type="text/javascript" charset="utf-8">
   $('.js-previous').on("click", function(e){
     e.preventDefault();
-    var nextId = parseInt($('.js-next').attr("data-id")) - 1;
-    $.get("/stones/" + nextId + ".json", function(data){
+    var prevId = parseInt($('.js-previous').attr("data-id")) - 1;
+    $.get("/stones/" + prevId + ".json", function(data){
       $('.stoneName').text("Name: " + data["name"]);
       $('.stoneWeight').text("Weight: " + data["weight"] + " ct");
       $('.stoneCost').text("Cost: $" + data["cost"]);
       if(data["designs"].length > 0){
-        console.log("there are designs");
+        for(i = 0; i < data["designs"].length; i++){
+          $(".stoneDesigns").show();
+          $(".designList").text("goodbye");
+        }
       }
       $('.js-previous').attr("data-id", data["id"]);
     })
