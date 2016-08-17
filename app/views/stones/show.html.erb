@@ -11,14 +11,14 @@
 <div class="stoneDesigns">
   <% if @stone.designs %>
     <h2>Stone Designs</h2>
-    <ul class="designList"><% @stone.designs.each do |design| %>
-      <li><%= design.model %> <em>by</em> <%= design.user.email %></li>
-      <% end %>
-    </ul>
+      <ul><% @stone.designs.each do |design| %>
+        <li><%= design.metal %> <%= design.model %></li>
+        <% end %>
+      </ul>
   <% end %>
 </div>
 
-<a href="#" class="js-previous" data-id="<%=@stone.id%>">Previous</a>
+<a href="#" class="js-previous" data-prev="<%=@stone.id%>">Previous</a>
 
 <a href="#" class="js-next" data-id="<%=@stone.id%>">Next</a>
 
@@ -44,21 +44,20 @@
   $('.js-next').on("click", function(e){
     e.preventDefault();
     var nextId = parseInt($('.js-next').attr("data-id")) + 1;
-    $.get("/stones/" + nextId + ".json", function(data){
-      $('.stoneName').text("Name: " + data["name"]);
-      $('.stoneWeight').text("Weight: " + data["weight"] + " ct");
-      $('.stoneCost').text("Cost: $" + data["cost"]);
-      if(data["designs"].length > 0){
-        var l = "<li>";
-        for(i = 0; i < data["designs"].length; i++){
-          $(".stoneDesigns").show();
-          l += data["designs"][i]["model"] + "<em> by </em>";
-          console.log(data["designs"][i]);
+    $.get("/stones/" + nextId + ".json", function(stone){
+      $('.stoneName').text("Name: " + stone["name"]);
+      $('.stoneWeight').text("Weight: " + stone["weight"] + " ct");
+      $('.stoneCost').text("Cost: $" + stone["cost"]);
+      if(stone["designs"].length > 0){
+        var l = "<h2>Stone Designs</h2> <ul>";
+        for(i = 0; i < stone["designs"].length; i++){
+          l += "<li>" + stone["designs"][i]["metal"] + " " + stone["designs"][i]["model"] + "</li>";
         }
-        l += "</li>";
-        $(".designList").html(l);
+        l += "</ul>";
+        $(".stoneDesigns").html(l);
       }
-      $('.js-next').attr("data-id", data["id"]);
+      $('.js-next').attr("data-id", stone["id"]);
+      $('.js-previous').attr("data-prev", stone["id"]);
     })
   })
 </script>
@@ -66,18 +65,22 @@
 <script type="text/javascript" charset="utf-8">
   $('.js-previous').on("click", function(e){
     e.preventDefault();
-    var prevId = parseInt($('.js-previous').attr("data-id")) - 1;
-    $.get("/stones/" + prevId + ".json", function(data){
-      $('.stoneName').text("Name: " + data["name"]);
-      $('.stoneWeight').text("Weight: " + data["weight"] + " ct");
-      $('.stoneCost').text("Cost: $" + data["cost"]);
-      if(data["designs"].length > 0){
-        for(i = 0; i < data["designs"].length; i++){
-          $(".stoneDesigns").show();
-          $(".designList").text("goodbye");
+    var prevId = parseInt($('.js-previous').attr("data-prev")) - 1;
+    $.get("/stones/" + prevId + ".json", function(stone){
+      $('.stoneName').text("Name: " + stone["name"]);
+      $('.stoneWeight').text("Weight: " + stone["weight"] + " ct");
+      $('.stoneCost').text("Cost: $" + stone["cost"]);
+      if(stone["designs"].length > 0){
+        var l = "<h2>Stone Designs</h2> <ul>";
+        for(i = 0; i < stone["designs"].length; i++){
+          l += "<li>" + stone["designs"][i]["metal"] + " " + stone["designs"][i]["model"] + "</li>";
         }
+        l += "</ul>";
+        $(".stoneDesigns").html(l);
       }
-      $('.js-previous').attr("data-id", data["id"]);
+      $('.js-previous').attr("data-prev", stone["id"]);
+      $('.js-next').attr("data-id", stone["id"]);
+
     })
   })
 </script>
