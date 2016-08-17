@@ -8,6 +8,16 @@
   <li class="stoneCost">Cost: $<%= @stone.cost %> </li>
 </ul>
 
+<div class="stoneDesigns">
+  <% if @stone.designs %>
+    <h2>Stone Designs</h2>
+    <ul><% @stone.designs.each do |design| %>
+      <li><%= design.model %> <em>by</em> <%= design.user.email %></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>
+
 <a href="#" class="js-previous" data-id="<%=@stone.id%>">Previous</a>
 
 <a href="#" class="js-next" data-id="<%=@stone.id%>">Next</a>
