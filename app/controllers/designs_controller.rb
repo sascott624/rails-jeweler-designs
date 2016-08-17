@@ -127,11 +127,19 @@ class DesignsController < ApplicationController
 
   def bracelets
     @designs = Design.bracelets
+    # respond_to do |f|
+    #   f.html { render :index }
+    #   f.json { render json: @designs }
+    # end
     render :index
   end
 
   def rings
     @designs = Design.rings
+    # respond_to do |f|
+    #   f.html { render :index }
+    #   f.json { render json: @designs }
+    # end
     render :index
   end
 
