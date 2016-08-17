@@ -1,5 +1,7 @@
 class StonesController < ApplicationController
 
+  before_action :stone_find, only: [:show, :edit, :destroy]
+
   def index
     if params[:user_id]
       @stones = User.find(params[:user_id]).stones.uniq
@@ -27,7 +29,6 @@ class StonesController < ApplicationController
   end
 
   def show
-    stone_find
   end
 
   def update
@@ -41,13 +42,11 @@ class StonesController < ApplicationController
   end
 
   def destroy
-    stone_find
     @stone.destroy
     redirect_to stones_path
   end
 
   def edit
-    stone_find
   end
 
   private
