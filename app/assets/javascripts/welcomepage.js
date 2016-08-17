@@ -25,7 +25,7 @@ var getStones = function(){
     $.each(data, function(index, stone){
       list += "<li data-id="+ stone["id"] + "><a href='/stones/" + stone["id"] + "'>" + stone["name"] + "</a>: " + stone["weight"] + "ct </li>"
     });
-    list += "</ul>"
+    list += "</ul> <a href='/stones/new'> New </a>";
     $("#stone-list").html(list);
   })
 }

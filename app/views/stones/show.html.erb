@@ -73,7 +73,8 @@
       if(stone["designs"].length > 0){
         var l = "<h2>Stone Designs</h2> <ul>";
         for(i = 0; i < stone["designs"].length; i++){
-          l += "<li>" + stone["designs"][i]["metal"] + " " + stone["designs"][i]["model"] + "</li>";
+          var desc = stone["designs"][i]["metal"] + " " + stone["designs"][i]["model"];
+          l += "<li>" + desc + "</li>";
         }
         l += "</ul>";
         $(".stoneDesigns").html(l);
