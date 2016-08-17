@@ -1,15 +1,15 @@
 class StonesController < ApplicationController
 
   def index
-    # if params[:user_id]
-    #   @stones = User.find(params[:user_id]).stones.uniq
-    # else
-    #   @stones = Stone.all
-    # end
-    # @expensive = Stone.most_expensive
-    # @cheap = Stone.least_expensive
-    @stones = Stone.all
-    render json: @stones
+    if params[:user_id]
+      @stones = User.find(params[:user_id]).stones.uniq
+      @expensive = Stone.most_expensive
+      @cheap = Stone.least_expensive
+    else
+      @stones = Stone.all
+      render json: @stones
+    end
+
   end
 
   def create
