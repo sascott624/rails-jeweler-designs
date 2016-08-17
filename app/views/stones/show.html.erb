@@ -5,13 +5,15 @@
 <ul>
   <li class="stoneName">Name: <%= @stone.name %></li>
   <li class="stoneWeight">Weight: <%= @stone.weight%> ct </li>
-  <li class="stoneCost">Cost: <%= number_to_currency(@stone.cost) %> </li>
+  <li class="stoneCost">Cost: $<%= @stone.cost %> </li>
 </ul>
 
-<a href="#" class="js-next" data-id="<%=@stone.id%>">Next...</a>
+<a href="#" class="js-previous" data-id="<%=@stone.id%>">Previous</a>
+
+<a href="#" class="js-next" data-id="<%=@stone.id%>">Next</a>
 
 
-<% if current_page?(stone_path(@stone)) && current_user %>
+<!-- <% if current_page?(stone_path(@stone)) && current_user %>
   <h3><em>Add a new design:</em></h3>
 
   <%= form_for @stone.designs.build do |f| %>
@@ -26,13 +28,32 @@
 
     <%= f.submit %>
   <% end %>
-<% end %>
+<% end %> -->
 
 <script type="text/javascript" charset="utf-8">
-  $('.js-next').on("click", function(){
-    var nextId = parseInt($('.js-next').attr("data-id"));
+  $('.js-next').on("click", function(e){
+    e.preventDefault();
+    var nextId = parseInt($('.js-next').attr("data-id")) + 1;
+    // console.log(nextId);
     $.get("/stones/" + nextId + ".json", function(data){
-      alert(data);
+      $('.stoneName').text("Name: " + data["name"]);
+      $('.stoneWeight').text("Weight: " + data["weight"] + " ct");
+      $('.stoneCost').text("Cost: $" + data["cost"]);
+      $('.js-next').attr("data-id", data["id"]);
+    })
+  })
+</script>
+
+<script type="text/javascript" charset="utf-8">
+  $('.js-previous').on("click", function(e){
+    e.preventDefault();
+    var nextId = parseInt($('.js-next').attr("data-id")) - 1;
+    // console.log(nextId);
+    $.get("/stones/" + nextId + ".json", function(data){
+      $('.stoneName').text("Name: " + data["name"]);
+      $('.stoneWeight').text("Weight: " + data["weight"] + " ct");
+      $('.stoneCost').text("Cost: $" + data["cost"]);
+      $('.js-next').attr("data-id", data["id"]);
     })
   })
 </script>
