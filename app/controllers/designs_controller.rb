@@ -3,11 +3,13 @@ class DesignsController < ApplicationController
   before_action :authorize_design_owner, only: [:edit, :destroy]
 
   def index
-    if params[:user_id]
-      @designs = User.find(params[:user_id]).designs
-    else
-      @designs = Design.all
-    end
+    # if params[:user_id]
+    #   @designs = User.find(params[:user_id]).designs
+    # else
+    #   @designs = Design.all
+    # end
+    @designs = Design.all
+    render json: @designs
   end
 
   def new

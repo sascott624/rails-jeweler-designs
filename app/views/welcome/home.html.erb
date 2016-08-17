@@ -1,13 +1,15 @@
 <%= render 'welcome/greet' %>
 
-<h2><%= link_to "View All Designs", designs_path %></h2>
-<ul>
-  <li><%= link_to "Necklaces", necklaces_path %></li>
-  <li><%= link_to "Bracelets", bracelets_path %></li>
-  <li><%= link_to "Earrings", earrings_path %></li>
-  <li><%= link_to "Rings", rings_path %></li>
-</ul>
-
+<h2 id="designs">Designs</h2>
+<!-- <%= link_to "View All Designs", designs_path %> -->
+<div id="design-list">
+  <ul>
+    <li><%= link_to "Necklaces", necklaces_path %></li>
+    <li><%= link_to "Bracelets", bracelets_path %></li>
+    <li><%= link_to "Earrings", earrings_path %></li>
+    <li><%= link_to "Rings", rings_path %></li>
+  </ul>
+</div>
 
 <h2 id="stones">Stones</h2>
 <!-- <%= link_to "View All Stones", stones_path %> -->

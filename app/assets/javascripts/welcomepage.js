@@ -1,8 +1,12 @@
 $(function(){
   attachListeners();
+  $('#design-list').hide();
 })
 
 var attachListeners = function(){
+  $("#designs").on("click", function(){
+    showDesigns();
+  })
   $('#stones').on("click", function(){
     getStones();
   });
@@ -11,10 +15,11 @@ var attachListeners = function(){
   })
 }
 
+var showDesigns = function(){
+  $('#design-list').show();
+}
+
 var getStones = function(){
-  // query the db for all stones, then list stones on welcome page
-  // getting "/stones" goes to stones#index
-  // instead of rendering the index, we're going to render json: @stones
   $.getJSON("/stones.json", function(data){
     var list = "<ul>";
     $.each(data, function(index, stone){
