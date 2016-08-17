@@ -1,13 +1,20 @@
 <%= render 'layouts/messages' %>
 
 <h1>Design Details</h1>
+<p class="designUser"><em>Created By: <%= @design.user.email %></em></p>
 
 <ul>
-  <li>Model: <%= @design.model %></li>
-  <li>Stone: <%= link_to @design.stone.name, stone_path(@design.stone) %> </li>
-  <li>Metal: <%= @design.metal %> </li>
-  <li><strong>Price: </strong><%= number_to_currency(@design.price) %></li>
+  <li class="designModel">Model: <%= @design.model %></li>
+  <!-- <li>Stone: <%= link_to @design.stone.name, stone_path(@design.stone) %> </li> -->
+  <li class="designStone">Stone: <%= @design.stone.name %></li>
+  <li class="designMetal">Metal: <%= @design.metal %> </li>
+  <li class="designPrice"><strong>Price: </strong><%= number_to_currency(@design.price) %></li>
 </ul>
+
+<a href="#" class="js-previous" data-id="<%=@design.id%>">Previous</a>
+
+<a href="#" class="js-next" data-id="<%=@design.id%>">Next</a>
+
 
 <% if current_user == @design.user %>
   <%= link_to "Edit Design", edit_user_design_path(@design.user, @design) %>
@@ -15,3 +22,17 @@
   <%= form_tag user_design_path(current_user, @design), method: "delete" %>
     <%= submit_tag "Delete Design" %>
 <% end %>
+
+
+<script type="text/javascript" charset="utf-8">
+  $('.js-previous').on("click", function(e){
+    e.preventDefault();
+    var nextId = parseInt($('.js-next').attr("data-id")) - 1;
+    $.get("/stones/" + nextId + ".json", function(data){
+      $('.stoneName').text("Name: " + data["name"]);
+      $('.stoneWeight').text("Weight: " + data["weight"] + " ct");
+      $('.stoneCost').text("Cost: $" + data["cost"]);
+      $('.js-previous').attr("data-id", data["id"]);
+    })
+  })
+</script>

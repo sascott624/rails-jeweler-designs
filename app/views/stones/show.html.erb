@@ -34,7 +34,6 @@
   $('.js-next').on("click", function(e){
     e.preventDefault();
     var nextId = parseInt($('.js-next').attr("data-id")) + 1;
-    // console.log(nextId);
     $.get("/stones/" + nextId + ".json", function(data){
       $('.stoneName').text("Name: " + data["name"]);
       $('.stoneWeight').text("Weight: " + data["weight"] + " ct");
@@ -48,12 +47,11 @@
   $('.js-previous').on("click", function(e){
     e.preventDefault();
     var nextId = parseInt($('.js-next').attr("data-id")) - 1;
-    // console.log(nextId);
     $.get("/stones/" + nextId + ".json", function(data){
       $('.stoneName').text("Name: " + data["name"]);
       $('.stoneWeight').text("Weight: " + data["weight"] + " ct");
       $('.stoneCost').text("Cost: $" + data["cost"]);
-      $('.js-next').attr("data-id", data["id"]);
+      $('.js-previous').attr("data-id", data["id"]);
     })
   })
 </script>

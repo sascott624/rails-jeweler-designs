@@ -22,6 +22,10 @@ class DesignsController < ApplicationController
 
   def show
     design_find
+    respond_to do |f|
+      f.html { render :show }
+      f.json { render json: @design }
+    end
   end
 
 
