@@ -3,10 +3,12 @@
 <h1>Stone Details</h1>
 
 <ul>
-  <li>Name: <%= @stone.name %></li>
-  <li>Weight: <%= @stone.weight%> ct </li>
-  <li>Cost: <%= number_to_currency(@stone.cost) %> </li>
+  <li class="stoneName">Name: <%= @stone.name %></li>
+  <li class="stoneWeight">Weight: <%= @stone.weight%> ct </li>
+  <li class="stoneCost">Cost: <%= number_to_currency(@stone.cost) %> </li>
 </ul>
+
+<a href="#" class="js-next" data-id="<%=@stone.id%>">Next...</a>
 
 
 <% if current_page?(stone_path(@stone)) && current_user %>
@@ -25,3 +27,12 @@
     <%= f.submit %>
   <% end %>
 <% end %>
+
+<script type="text/javascript" charset="utf-8">
+  $('.js-next').on("click", function(){
+    var nextId = parseInt($('.js-next').attr("data-id"));
+    $.get("/stones/" + nextId + ".json", function(data){
+      alert(data);
+    })
+  })
+</script>
