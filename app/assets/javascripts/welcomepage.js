@@ -1,9 +1,3 @@
-//
-// <h2 id="stones"><%= link_to "View All Stones", stones_path %></h2>
-//
-//
-// <h2 id="users"><%= link_to "View All Users", users_path %></h2>
-
 $(function(){
   attachListeners();
 })
@@ -12,6 +6,9 @@ var attachListeners = function(){
   $('#stones').on("click", function(){
     getStones();
   });
+  $('#users').on("click", function(){
+    getUsers();
+  })
 }
 
 var getStones = function(){
@@ -21,9 +18,20 @@ var getStones = function(){
   $.getJSON("/stones.json", function(data){
     var list = "<ul>";
     $.each(data, function(index, stone){
-      list += "<li data-id="+ stone["id"] + ">" + stone["name"] + ": " + stone["weight"] + "ct </li>"
+      list += "<li data-id="+ stone["id"] + "><a href='/stones/" + stone["id"] + "'>" + stone["name"] + "</a>: " + stone["weight"] + "ct </li>"
     });
     list += "</ul>"
     $("#stone-list").html(list);
+  })
+}
+
+var getUsers = function(){
+  $.getJSON("/users.json", function(data){
+    var list = "<ul>";
+    $.each(data, function(index, user){
+      list += "<li data-id="+ user["id"] + "><a href='/users/" + user["id"] + "'>" + user["email"] + "</a></li>"
+    });
+    list += "</ul>"
+    $("#user-list").html(list);
   })
 }
