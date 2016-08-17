@@ -48,6 +48,9 @@
       $('.stoneName').text("Name: " + data["name"]);
       $('.stoneWeight').text("Weight: " + data["weight"] + " ct");
       $('.stoneCost').text("Cost: $" + data["cost"]);
+      if(data["designs"].length > 0){
+        console.log("there are designs");
+      }
       $('.js-next').attr("data-id", data["id"]);
     })
   })
@@ -61,6 +64,9 @@
       $('.stoneName').text("Name: " + data["name"]);
       $('.stoneWeight').text("Weight: " + data["weight"] + " ct");
       $('.stoneCost').text("Cost: $" + data["cost"]);
+      if(data["designs"].length > 0){
+        console.log("there are designs");
+      }
       $('.js-previous').attr("data-id", data["id"]);
     })
   })
