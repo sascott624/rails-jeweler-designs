@@ -10,7 +10,7 @@
 
 <div class="stoneDesigns">
   <% if @stone.designs.length > 0 %>
-    <!-- <h2>Stone Designs</h2> -->
+    <h2>Stone Designs</h2>
       <ul><% @stone.designs.each do |design| %>
         <li><%= design.metal %> <%= design.model %></li>
         <% end %>
