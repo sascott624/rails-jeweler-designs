@@ -9,12 +9,14 @@
 </ul>
 
 <div class="stoneDesigns">
-  <% if @stone.designs %>
-    <h2>Stone Designs</h2>
+  <% if @stone.designs.length > 0 %>
+    <!-- <h2>Stone Designs</h2> -->
       <ul><% @stone.designs.each do |design| %>
         <li><%= design.metal %> <%= design.model %></li>
         <% end %>
       </ul>
+  <% elsif @stone.designs.length == 0 %>
+    <p>This stone has not been used yet</p>
   <% end %>
 </div>
 
@@ -55,6 +57,9 @@
         }
         l += "</ul>";
         $(".stoneDesigns").html(l);
+      } else {
+        var p = "<p>This stone has not been used yet</p>";
+        $(".stoneDesigns").html(p);
       }
       $('.js-next').attr("data-id", stone["id"]);
       $('.js-previous').attr("data-prev", stone["id"]);
@@ -78,6 +83,9 @@
         }
         l += "</ul>";
         $(".stoneDesigns").html(l);
+      } else {
+        var p = "<p>This stone has not been used yet</p>";
+        $(".stoneDesigns").html(p);
       }
       $('.js-previous').attr("data-prev", stone["id"]);
       $('.js-next').attr("data-id", stone["id"]);
