@@ -17,7 +17,7 @@ class StonesController < ApplicationController
   def create
     @stone = Stone.new(stone_params)
     if @stone.save
-      redirect_to stone_path(@stone)
+      render json: @stone, status: 201
     else
       @stone.errors.add(:incomplete_form, "Stones must have a valid name, weight, and cost.")
       render :new

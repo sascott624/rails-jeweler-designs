@@ -1,4 +1,5 @@
-$(function(){
+
+$(document).on('turbolinks:load', function() {
   attachListeners();
   $('#design-list').hide();
 })
