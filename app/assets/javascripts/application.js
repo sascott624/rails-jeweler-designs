@@ -14,5 +14,4 @@
 //= require jquery_ujs
 //= require_tree .
 //= require welcomepage
-//= require new_stone
 //= require turbolinks
